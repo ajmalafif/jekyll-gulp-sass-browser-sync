@@ -9,7 +9,13 @@ var prefix      = require('gulp-autoprefixer');
 var deploy      = require('gulp-gh-pages-cname');
 var htmlmin     = require('gulp-htmlmin');
 var uglify      = require('gulp-uglify');
+// var cloudflare = require('gulp-cloudflare');
 var cp          = require('child_process');
+// var imagemin = require('gulp-imagemin');
+// var pngquant = require('imagemin-pngquant');
+// var jpegtran = require('imagemin-jpegtran');
+// var gifsicle = require('imagemin-gifsicle');
+// var download = require('gulp-download');
 
 
 var ghpages = {
@@ -134,6 +140,43 @@ gulp.task('deploy', ['compress', 'jekyll-rebuild'], function () {
     .pipe(gulp.dest('_site/'))
     .pipe(deploy(ghpages))
 });
+
+/**
+* Google Analytics
+*/
+
+// gulp.task('fetch-newest-analytics', function() {
+//     return download('https://www.google-analytics.com/analytics.js')
+//         .pipe(gulp.dest('assets/'));
+// });
+
+/**
+* Minify Images
+*/
+
+// gulp.task('optimize-images', function () {
+//     return gulp.src(['_site/**/*.jpg', '_site/**/*.jpeg', '_site/**/*.gif', '_site/**/*.png'])
+//         .pipe(imagemin({
+//             progressive: false,
+//             svgoPlugins: [{removeViewBox: false}],
+//             use: [pngquant(), jpegtran(), gifsicle()]
+//         }))
+//         .pipe(gulp.dest('_site/'));
+// });
+
+/**
+* Purge CloudFlare
+*/
+
+// gulp.task('purge-cache', function() {
+//     var options = {
+//         token: config.cloudflareToken,
+//         email: config.cloudflareEmail,
+//         domain: config.cloudflareDomain
+//     };
+
+//     cloudflare(options);
+// });
 
 /**
  * Default task, running just `gulp` will compile the sass,
