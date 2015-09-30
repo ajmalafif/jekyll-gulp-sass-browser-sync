@@ -5,7 +5,8 @@ var critical    = require('critical');
 var browserSync = require('browser-sync');
 var sass        = require('gulp-sass');
 var prefix      = require('gulp-autoprefixer');
-var deploy      = require('gulp-gh-pages');
+var deploy      = require('gulp-gh-pages-cname');
+var htmlmin     = require('gulp-htmlmin');
 var cp          = require('child_process');
 
 
@@ -37,7 +38,7 @@ gulp.task('jekyll-rebuild', ['jekyll-build'], function () {
 /**
  * Wait for jekyll-build, then launch the Server
  */
-gulp.task('browser-sync', ['sass', 'jekyll-build'], function() {
+gulp.task('browser-sync', ['sass', 'jekyll-build', 'htmlmin'], function() {
     browserSync({
         server: {
             baseDir: '_site'
@@ -65,6 +66,12 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('_site/css'))
         .pipe(browserSync.reload({stream:true}))
         .pipe(gulp.dest('css'));
+});
+
+gulp.task('htmlmin', function() {
+  return gulp.src(['_site/**/*.html'])
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest('_site/'))
 });
 
 /**
@@ -105,7 +112,7 @@ gulp.task('watch', function () {
 /**
 * Deploy to gh-pages
 **/
-gulp.task('deploy', ['jekyll-rebuild'], function () {
+gulp.task('deploy', ['jekyll-rebuild', 'htmlmin'], function () {
   return gulp.src("./_site/**/*")
     .pipe(deploy(ghpages))
 });

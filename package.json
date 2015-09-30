@@ -13,6 +13,7 @@
     "gulp": "^3.8.8",
     "gulp-autoprefixer": "1.0.0",
     "gulp-gh-pages": "^0.5.2",
+    "gulp-gh-pages-cname": "^0.5.2",
     "gulp-sass": "^0.7.3"
   },
   "repository": {
