@@ -129,7 +129,7 @@ gulp.task('watch', function () {
 * Deploy to gh-pages
 **/
 gulp.task('deploy', ['compress', 'jekyll-rebuild'], function () {
-  return gulp.src("./_site/**/*")
+  return gulp.src("./_site/**/*.html")
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest('_site/'))
     .pipe(deploy(ghpages))
