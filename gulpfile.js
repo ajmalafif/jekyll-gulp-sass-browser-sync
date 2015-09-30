@@ -4,9 +4,11 @@ var uncss       = require('gulp-uncss');
 var critical    = require('critical');
 var browserSync = require('browser-sync');
 var sass        = require('gulp-sass');
+var minifyCss   = require('gulp-minify-css');
 var prefix      = require('gulp-autoprefixer');
 var deploy      = require('gulp-gh-pages-cname');
 var htmlmin     = require('gulp-htmlmin');
+var uglify      = require('gulp-uglify');
 var cp          = require('child_process');
 
 
@@ -38,7 +40,7 @@ gulp.task('jekyll-rebuild', ['jekyll-build'], function () {
 /**
  * Wait for jekyll-build, then launch the Server
  */
-gulp.task('browser-sync', ['sass', 'jekyll-build', 'htmlmin'], function() {
+gulp.task('browser-sync', ['sass', 'jekyll-build'], function() {
     browserSync({
         server: {
             baseDir: '_site'
@@ -63,10 +65,24 @@ gulp.task('sass', function () {
             html: ['_site/*.html', '_site/**/*.html']
         }))
         .pipe(sourcemaps.write('./'))
+        .pipe(minifyCss())
         .pipe(gulp.dest('_site/css'))
         .pipe(browserSync.reload({stream:true}))
         .pipe(gulp.dest('css'));
 });
+
+/**
+* Minify JS
+**/
+gulp.task('compress', function() {
+  return gulp.src('_site/**/*.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('_site/'));
+});
+
+/**
+* Minify HTML
+**/
 
 gulp.task('htmlmin', function() {
   return gulp.src(['_site/**/*.html'])
@@ -112,8 +128,10 @@ gulp.task('watch', function () {
 /**
 * Deploy to gh-pages
 **/
-gulp.task('deploy', ['jekyll-rebuild', 'htmlmin'], function () {
+gulp.task('deploy', ['jekyll-rebuild', 'compress'], function () {
   return gulp.src("./_site/**/*")
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest('_site/'))
     .pipe(deploy(ghpages))
 });
 

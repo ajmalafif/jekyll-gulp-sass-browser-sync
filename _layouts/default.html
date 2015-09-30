@@ -12,7 +12,7 @@
 </head>
 <body>
 
-  <footer class="site">
+  <div class="site">
     <div class="header">
       <h1 class="title"><a href="/">{{ site.name }}</a></h1>
       <a class="extra" href="/">home</a>
@@ -20,7 +20,7 @@
 
     {{ content }}
 
-    <div class="footer">
+    <footer class="footer">
       <div class="contact">
         <p>
           Your Name is<br />
@@ -28,16 +28,15 @@
           you@example.com
         </p>
       </div>
-    </div>
-  </footer>
+    </footer>
+  </div>
 
   <!-- Loadd css -->
-<script>
-  loadCSS('/css/main.css', false, 'main');
-</script>
-<noscript>
-  <link rel="stylesheet" href="/css/main.css">
-</noscript>
-
+  <script>
+    loadCSS('/css/main.css', false, 'main');
+  </script>
+  <noscript>
+    <link rel="stylesheet" href="/css/main.css">
+  </noscript>
 </body>
 </html>
