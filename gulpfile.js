@@ -4,7 +4,14 @@ var critical    = require('critical');
 var browserSync = require('browser-sync');
 var sass        = require('gulp-sass');
 var prefix      = require('gulp-autoprefixer');
+var deploy      = require('gulp-gh-pages');
 var cp          = require('child_process');
+
+
+var ghpages = {
+      remoteUrl: "git@github.com:ajmalafif/ajmalafif.com.git",
+      branch: "gh-pages"
+};
 
 var messages = {
     jekyllBuild: '<span style="color: grey">Running:</span> $ jekyll build'
@@ -88,6 +95,14 @@ gulp.task('critical', function (cb) {
 gulp.task('watch', function () {
     gulp.watch('_scss/*.scss', ['sass', 'critical']);
     gulp.watch(['*.html', '_layouts/*.html', '_posts/*'], ['sass', 'critical', 'jekyll-rebuild']);
+});
+
+/**
+* Deploy to gh-pages
+**/
+gulp.task('deploy', ['jekyll-rebuild'], function () {
+  return gulp.src("./_site/**/*")
+    .pipe(deploy(ghpages))
 });
 
 /**
