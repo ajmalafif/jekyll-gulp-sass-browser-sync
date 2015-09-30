@@ -313,6 +313,11 @@ a:visited {
 
 /* Literal.Number.Integer.Long */
 
+.notused {
+  background-color: #222;
+  color: #fff;
+}
+
 /* not used */
 
 body {

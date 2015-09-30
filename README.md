@@ -1,6 +1,6 @@
 # TODO
 - [x] uncss
-- [ ] critical path
+- [x] [critical path](https://fourword.fourkitchens.com/article/use-gulp-automate-your-critical-path-css)
 
 ## jekyll-gulp-sass-browser-sync
 

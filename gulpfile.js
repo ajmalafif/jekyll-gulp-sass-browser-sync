@@ -1,5 +1,6 @@
 var gulp        = require('gulp');
 var uncss       = require('gulp-uncss');
+var critical    = require('critical');
 var browserSync = require('browser-sync');
 var sass        = require('gulp-sass');
 var prefix      = require('gulp-autoprefixer');
@@ -55,12 +56,38 @@ gulp.task('sass', function () {
 });
 
 /**
+* Dynamic critical path
+**/
+
+gulp.task('critical', function (cb) {
+  critical.generate({
+    base: '_site/',
+    src: ['*.html', '**/*.html'],
+    css: ['css/main.css'],
+    dimensions: [{
+      width: 320,
+      height: 480
+    },{
+      width: 768,
+      height: 1024
+    },{
+      width: 1280,
+      height: 960
+    }],
+    dest: '../_includes/critical.css',
+    minify: true,
+    extract: false,
+    ignore: ['font-face']
+  });
+});
+
+/**
  * Watch scss files for changes & recompile
  * Watch html/md files, run jekyll & reload BrowserSync
  */
 gulp.task('watch', function () {
-    gulp.watch('_scss/*.scss', ['sass']);
-    gulp.watch(['*.html', '_layouts/*.html', '_posts/*'], ['sass', 'jekyll-rebuild']);
+    gulp.watch('_scss/*.scss', ['sass', 'critical']);
+    gulp.watch(['*.html', '_layouts/*.html', '_posts/*'], ['sass', 'critical', 'jekyll-rebuild']);
 });
 
 /**
