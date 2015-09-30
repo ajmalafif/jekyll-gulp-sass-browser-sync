@@ -1,4 +1,5 @@
 var gulp        = require('gulp');
+var sourcemaps = require('gulp-sourcemaps');
 var uncss       = require('gulp-uncss');
 var critical    = require('critical');
 var browserSync = require('browser-sync');
@@ -49,14 +50,18 @@ gulp.task('browser-sync', ['sass', 'jekyll-build'], function() {
  */
 gulp.task('sass', function () {
     return gulp.src('_scss/main.scss')
+        .pipe(sourcemaps.init())  // Initializes sourcemaps
         .pipe(sass({
             includePaths: ['scss'],
+            errLogToConsole: true,
+            outputStyle: "compressed",
             onError: browserSync.notify
         }))
         .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }))
         .pipe(uncss({
             html: ['_site/*.html', '_site/**/*.html']
         }))
+        .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('_site/css'))
         .pipe(browserSync.reload({stream:true}))
         .pipe(gulp.dest('css'));
