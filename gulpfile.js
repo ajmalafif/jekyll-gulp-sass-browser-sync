@@ -76,7 +76,7 @@ gulp.task('sass', function () {
 **/
 gulp.task('compress', function() {
   return gulp.src('_site/**/*.js')
-    .pipe(uglify())
+    .pipe(uglify({compress:true}))
     .pipe(gulp.dest('_site/'));
 });
 
@@ -121,14 +121,14 @@ gulp.task('critical', function (cb) {
  * Watch html/md files, run jekyll & reload BrowserSync
  */
 gulp.task('watch', function () {
-    gulp.watch('_scss/*.scss', ['sass', 'critical']);
-    gulp.watch(['*.html', '_layouts/*.html', '_posts/*'], ['sass', 'critical', 'jekyll-rebuild']);
+    gulp.watch('_scss/*.scss', ['sass', 'critical', 'compress']);
+    gulp.watch(['*.html', '_layouts/*.html', '_posts/*'], ['sass', 'critical', 'compress', 'jekyll-rebuild']);
 });
 
 /**
 * Deploy to gh-pages
 **/
-gulp.task('deploy', ['jekyll-rebuild', 'compress'], function () {
+gulp.task('deploy', ['compress', 'jekyll-rebuild'], function () {
   return gulp.src("./_site/**/*")
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest('_site/'))
