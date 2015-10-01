@@ -1,6 +1,12 @@
-# TODO
+# Starter Template for Jekyll
+
+This fork is intended to be a starter template that take cares of these added features on top of [@shakyShane](@shakyShane)'s original repo.
+
 - [x] uncss
 - [x] [critical path](https://fourword.fourkitchens.com/article/use-gulp-automate-your-critical-path-css)
+- [x] [100/100 Google Page Insights](https://gist.github.com/ajmalafif/f754dac52aafbc8d576c)
+- [ ] Google Analytics
+- [ ] Gulp task to take care of CloudFlare settings
 
 ## jekyll-gulp-sass-browser-sync
 
