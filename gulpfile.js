@@ -1,3 +1,4 @@
+var config      = require('./gulpconfig.json');
 var gulp        = require('gulp');
 var sourcemaps = require('gulp-sourcemaps');
 var uncss       = require('gulp-uncss');
@@ -9,7 +10,7 @@ var prefix      = require('gulp-autoprefixer');
 var deploy      = require('gulp-gh-pages-cname');
 var htmlmin     = require('gulp-htmlmin');
 var uglify      = require('gulp-uglify');
-// var cloudflare = require('gulp-cloudflare');
+var cloudflare = require('gulp-cloudflare');
 var cp          = require('child_process');
 // var imagemin = require('gulp-imagemin');
 // var pngquant = require('imagemin-pngquant');
@@ -134,7 +135,7 @@ gulp.task('watch', function () {
 /**
 * Deploy to gh-pages
 **/
-gulp.task('deploy', ['compress', 'htmlmin', 'jekyll-rebuild'], function () {
+gulp.task('deploy', ['compress', 'htmlmin', 'jekyll-rebuild', 'purge-cache'], function () {
   return gulp.src("./_site/**/*")
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest('_site/'))
@@ -168,15 +169,15 @@ gulp.task('deploy', ['compress', 'htmlmin', 'jekyll-rebuild'], function () {
 * Purge CloudFlare
 */
 
-// gulp.task('purge-cache', function() {
-//     var options = {
-//         token: config.cloudflareToken,
-//         email: config.cloudflareEmail,
-//         domain: config.cloudflareDomain
-//     };
+gulp.task('purge-cache', function() {
+    var options = {
+        token: config.cloudflareToken,
+        email: config.cloudflareEmail,
+        domain: config.cloudflareDomain
+    };
 
-//     cloudflare(options);
-// });
+    cloudflare(options);
+});
 
 /**
  * Default task, running just `gulp` will compile the sass,

@@ -1,0 +1,5 @@
+{
+  "cloudflareToken": "token",
+  "cloudflareEmail": "email",
+  "cloudflareDomain": "domain"
+}
