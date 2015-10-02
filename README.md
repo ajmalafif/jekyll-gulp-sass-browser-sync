@@ -2,6 +2,8 @@
 
 This fork is intended to be a starter template that takes care of these added features on top of [@shakyShane](@shakyShane)'s original repo.
 
+## Checklist
+
 ### Performance
 
 - [ ] external vendors/libs via bower (or not)
@@ -11,7 +13,7 @@ This fork is intended to be a starter template that takes care of these added fe
 - [x] Google Analytics
 - [x] Gulp task to take care of CloudFlare settings
 
-## 100/100 score on Google Page Insights
+### 100/100 score on Google Page Insights
 
 <img src="https://www.evernote.com/l/AFkjlLCfreRH2omn9tvxcLTu9JoorovUM2YB/image.png"/>
 
