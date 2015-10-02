@@ -4,6 +4,7 @@ This fork is intended to be a starter template that takes care of these added fe
 
 ### Performance
 
+- [ ] external vendors/libs via bower (or not)
 - [x] uncss
 - [x] [critical path](https://fourword.fourkitchens.com/article/use-gulp-automate-your-critical-path-css)
 - [x] [100/100 Google Page Insights](https://gist.github.com/ajmalafif/f754dac52aafbc8d576c)
@@ -13,6 +14,12 @@ This fork is intended to be a starter template that takes care of these added fe
 ## 100/100 score on Google Page Insights
 
 <img src="https://www.evernote.com/l/AFkjlLCfreRH2omn9tvxcLTu9JoorovUM2YB/image.png"/>
+
+### User
+
+- [ ] RSS Feed
+- [ ] Animation
+- [ ] Interaction
 
 ### SEO
 
