@@ -15,7 +15,7 @@ This fork is intended to be a starter template that takes care of these added fe
 
 ### 100/100 score on Google Page Insights
 
-<img src="https://www.evernote.com/l/AFkjlLCfreRH2omn9tvxcLTu9JoorovUM2YB/image.png"/>
+<img src="https://www.evernote.com/l/AFkMLndbhvZP-o6xkbpU046CFEgRk404z_4B/image.png"/>
 
 ### User
 
