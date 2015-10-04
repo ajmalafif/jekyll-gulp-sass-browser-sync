@@ -13,10 +13,6 @@ This fork is intended to be a starter template that takes care of these added fe
 - [x] Google Analytics
 - [x] Gulp task to take care of CloudFlare settings
 
-### 100/100 score on Google Page Insights
-
-<img src="https://www.evernote.com/l/AFkMLndbhvZP-o6xkbpU046CFEgRk404z_4B/image.png"/>
-
 ### User
 
 - [ ] RSS Feed
@@ -26,6 +22,12 @@ This fork is intended to be a starter template that takes care of these added fe
 ### SEO
 
 - [x] sitemap
+
+### 100/100 score on Google Page Insights
+
+<hr>
+<img src="https://www.evernote.com/l/AFkMLndbhvZP-o6xkbpU046CFEgRk404z_4B/image.png"/>
+<hr>
 
 ## Gotchas
 
