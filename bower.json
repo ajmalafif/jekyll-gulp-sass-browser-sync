@@ -1,0 +1,19 @@
+{
+  "name": "ajmalafif/jekyll-gulp-sass-browser-sync",
+  "dependencies": {
+    "jquery": "*",
+    "bootstrap": "~3.3.5",
+    "modernizr": "*"
+    },
+    "overrides": {
+      "bootstrap" : {
+       "main": [
+       "dist/css/bootstrap.css",
+       "dist/js/bootstrap.js"
+       ]
+    },
+      "modernizr": {
+        "main": "modernizr.js"
+    }
+  }
+}
