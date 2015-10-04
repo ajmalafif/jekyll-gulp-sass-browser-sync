@@ -17,6 +17,17 @@ var cp          = require('child_process');
 // var jpegtran = require('imagemin-jpegtran');
 // var gifsicle = require('imagemin-gifsicle');
 // var download = require('gulp-download');
+var flatten         = require('gulp-flatten');
+var gulpFilter      = require('gulp-filter');
+var minifycss       = require('gulp-minify-css');
+var rename          = require('gulp-rename');
+var mainBowerFiles  = require('main-bower-files');
+var install         = require("gulp-install");
+
+gulp.task('install', function() {
+  gulp.src(['./bower.json', './package.json'])
+    .pipe(install());    // notify when done
+});
 
 
 var ghpages = {
@@ -164,6 +175,50 @@ gulp.task('deploy', ['compress', 'htmlmin', 'jekyll-rebuild', 'purge-cache'], fu
 //         }))
 //         .pipe(gulp.dest('_site/'));
 // });
+
+
+/**
+* Bower
+*/
+
+gulp.task('bower', function() {
+
+        var jsFilter = gulpFilter('**/*.js', {restore: true});
+        var cssFilter = gulpFilter('**/*.css', {restore: true});
+        var fontFilter = gulpFilter(['*.eot', '*.woff', '*.svg', '*.ttf'], {restore: true});
+
+        return gulp.src(mainBowerFiles({
+            paths: {
+                bowerDirectory: './bower_components',
+                bowerJson: './bower.json'
+            }
+        }))
+
+        // grab vendor js files from bower_components, minify and push in /public
+        .pipe(jsFilter)
+        .pipe(gulp.dest('js'))
+        .pipe(uglify())
+        .pipe(rename({
+            suffix: ".min"
+        }))
+        .pipe(gulp.dest('_site/js'))
+        .pipe(jsFilter.restore)
+
+        // grab vendor css files from bower_components, minify and push in /public
+        .pipe(cssFilter)
+        .pipe(gulp.dest('css'))
+        .pipe(minifycss())
+        .pipe(rename({
+            suffix: ".min"
+        }))
+        .pipe(gulp.dest('_site/css'))
+        .pipe(cssFilter.restore)
+
+        // grab vendor font files from bower_components and push in /public
+        .pipe(fontFilter)
+        .pipe(flatten())
+        .pipe(gulp.dest('fonts'));
+});
 
 /**
 * Purge CloudFlare
