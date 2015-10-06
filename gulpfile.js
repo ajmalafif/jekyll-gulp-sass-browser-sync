@@ -82,7 +82,7 @@ gulp.task('sass', function () {
         .pipe(uncss({
             html: ['_site/*.html', '_site/**/*.html']
         }))
-        .pipe(sourcemaps.write('./'))
+        // .pipe(sourcemaps.write('./'))
         .pipe(minifyCss())
         .pipe(gulp.dest('_site/css'))
         .pipe(browserSync.reload({stream:true}))
