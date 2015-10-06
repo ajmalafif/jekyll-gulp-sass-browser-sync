@@ -4,8 +4,12 @@ This fork is intended to be a starter template that takes care of these added fe
 
 ## Checklist
 
+- [ ] Include vendor JS into codebase
+- [ ] Cleanup `gulp default` task for critical and bower tasks
+
 ### Performance
 
+- [x] Use CloudFlare for leverage browser caching
 - [x] external vendors/libs via bower
 - [x] uncss
 - [x] [critical path](https://fourword.fourkitchens.com/article/use-gulp-automate-your-critical-path-css)
