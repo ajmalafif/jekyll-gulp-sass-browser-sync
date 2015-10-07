@@ -29,6 +29,13 @@ var browserify      = require('browserify');
 var plumber         = require('gulp-plumber');
 var glob            = require('glob');
 var source          = require('vinyl-source-stream');
+var gutil           = require('gulp-util');
+var reactify        = require('reactify');
+var watchify        = require('watchify');
+// var notify          = require('gulp-notify');
+var chalk           = require('chalk');
+var gcallback       = require('gulp-callback');
+var moment          = require('moment');
 
 /**
 * Config tasks & variables. Mostly have to run once or upon updating external packages
@@ -93,23 +100,58 @@ gulp.task('bower', function() {
 });
 
 /**
+* End of config tasks & variables
+**/
+
+/**
 * All build & deployment tasks are below this line
 **/
 
-gulp.task('bundle', function(){
-  var jsFiles = glob.sync('./js/entries.js');
-  return browserify({
-      entries: jsFiles
-    })
-    .bundle()
-    .pipe(source('app.js'))
-    .pipe(plumber())
-    .pipe(gulp.dest('./js'));
+var watchifyArgs = watchify.args;
+watchifyArgs.debug = true;
+
+var bundler = watchify(browserify('./js/entries.js', watchifyArgs));
+// add any other browserify options or transforms here. What is this doing? Clean this up later
+bundler.transform(reactify);
+
+bundler.on('time', function (time) {
+    var durationOfBundleBuild = moment.duration(time).asSeconds();
+    console.log(chalk.green('Updated'), ' browserify bundle in ', chalk.bold(durationOfBundleBuild + 's'), '\n');
+    browserSync.reload();
 });
 
-/**
-* End of config tasks & variables
-**/
+gulp.task('bundler', function() {
+
+    bundle(true);
+
+    bundler.on('update', function() {
+        console.log('updating...');
+        bundle(true);
+    });
+});
+
+gulp.task('browserify', function() {
+    bundle();
+    bundler.close();
+});
+
+function bundle(watching) {
+
+    console.log(chalk.yellow('Updating') + ' browserify bundle...');
+
+    bundler.bundle()
+        .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+        .pipe(source('app.js'))
+        .pipe(gulp.dest('_site/js'))
+        .pipe(gcallback(function() {
+          if (!watching) {
+              process.nextTick(function() {
+                  process.exit(0);
+              });
+          }
+        }));
+}
+
 
 /**
  * Build the Jekyll Site
@@ -232,7 +274,7 @@ gulp.task('critical', function (cb) {
  * Watch html/md files, run jekyll & reload BrowserSync
  */
 gulp.task('watch', function () {
-    gulp.watch('_scss/*.scss', ['sass', 'critical']);
+    gulp.watch('_scss/*.scss', ['sass', 'critical', 'jekyll-rebuild']);
     gulp.watch(['*.html', '_layouts/*.html', '_posts/*'], ['sass', 'critical', 'jekyll-rebuild']);
 });
 
@@ -288,4 +330,4 @@ gulp.task('purge-cache', function() {
  * Default task, running just `gulp` will compile the sass,
  * compile the jekyll site, launch BrowserSync & watch files.
  */
-gulp.task('default', ['browser-sync', 'watch']);
+gulp.task('default', ['browser-sync', 'watch', 'bundler']);

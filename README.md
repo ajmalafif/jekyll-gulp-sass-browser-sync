@@ -5,7 +5,6 @@ This fork is intended to be a starter template that takes care of these added fe
 ## Checklist
 
 ##### Gulp
-- [ ] Watchify
 - [ ] Cleanup `gulp default` task for critical and bower tasks
 
 ##### UX
@@ -14,6 +13,7 @@ This fork is intended to be a starter template that takes care of these added fe
 
 ### Performance
 
+- [x] Watchify
 - [x] Browserify
 - [x] Use CloudFlare for leverage browser caching
 - [x] external vendors/libs via Bower

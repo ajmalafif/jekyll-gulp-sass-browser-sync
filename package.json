@@ -1,5 +1,5 @@
 {
-  "name": "rojak",
+  "name": "Seratus",
   "version": "0.0.0",
   "description": "A starter project including full setup for Jekyll, GulpJS, SASS, BrowserSync, Browserify & more",
   "main": "gulpfile.js",

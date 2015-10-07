@@ -1,7 +1,7 @@
-name: Your New Jekyll Site
+name: Seratus
 markdown: redcarpet
 highlighter: pygments # or rouge or null
-exclude: ["node_modules", "gulpfile.js", "package.json", "bower_components", "js/entries.min.js", "js/entries.js", "gulpconfig.json", "bower.json"]
+exclude: ["node_modules", "gulpfile.js", "package.json", "bower_components", "./js/entries.js", "gulpconfig.json", "bower.json"]
 url: http://yoursite.com
 
 # Where things are
