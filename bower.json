@@ -2,7 +2,7 @@
   "name": "ajmalafif/jekyll-gulp-sass-browser-sync",
   "dependencies": {
     "jquery": "*",
-    "bootstrap": "~3.3.5",
+    "bootstrap": "*",
     "modernizr": "*"
     },
     "overrides": {
