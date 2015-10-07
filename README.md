@@ -35,7 +35,7 @@ This fork is intended to be a starter template that takes care of these added fe
 
 ## Gotchas
 
-- [ ] Remove .publish and CNAME if you want to use Github Pages
+- [ ] Remove .publish and add CNAME if you want to use Github Pages
 - [ ] Check `bower.json` for overrides if `gulp bower` doesn't import your bower packages
 - [ ] Run `gulp install` to upgrade bower packages updated via `bower.json`
 
