@@ -1,4 +1,5 @@
 name: Seratus
+description: Portfolio with Blogging starter template for Jekyll on Github Pages
 markdown: redcarpet
 highlighter: pygments # or rouge or null
 exclude: ["node_modules", "gulpfile.js", "package.json", "bower_components", "./js/entries.js", "gulpconfig.json", "bower.json"]

@@ -8,7 +8,7 @@ This fork is intended to be a starter template that takes care of these added fe
 - [ ] Cleanup `gulp default` task for critical and bower tasks
 
 ##### UX
-- [ ] RSS Feed
+- [x] RSS Feed
 - [ ] Animation & Interaction
 
 ### Performance
