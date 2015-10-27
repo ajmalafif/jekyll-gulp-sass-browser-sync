@@ -4,8 +4,15 @@ This fork is intended to be a starter template that takes care of these added fe
 
 ## Checklist
 
-##### Gulp
-- [ ] Cleanup `gulp default` task for critical and bower tasks
+- [x] Loop for Blog and Work section
+- [ ] Blog styling
+- [ ] Gulp task for image optimization
+- [ ] Images & icons spriting
+- [ ] Syntax highlighting
+- [ ] footer
+- [ ] Work section — Filter by tech: RoR, WP, Shopify, JS
+- [ ] Youtube video background on About page
+
 
 ##### UX
 - [x] RSS Feed
